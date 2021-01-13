@@ -1,0 +1,9 @@
+Convert
+_01_ActionsClick
+_02_ActionsDoubleClick
+_03_ActionsRightClick
+from day11 into testNG test cases in Task1 class
+
+actionClickTestCase -> "You have done a dynamic click"
+actionDoubleClickTestCase -> "You have done a double click"
+actionRightClickTestCase -> "You have done a right click"
