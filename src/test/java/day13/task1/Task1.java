@@ -50,4 +50,24 @@ public class Task1 {
 
         Assert.assertEquals(message, "You have done a double click");
     }
+
+    @Test
+    public void actionRightClickTestCase(){
+        System.setProperty("webdriver.chrome.driver", MyConstants.DRIVER_PATH);
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get( "https://demoqa.com/buttons" );
+
+        WebElement button = driver.findElement(By.xpath("//button[text()='Right Click Me']"));
+
+        Actions builder = new Actions(driver);
+        Action action = builder.moveToElement(button).contextClick().build();
+        action.perform();
+
+        String message = driver.findElement(By.id("rightClickMessage")).getText();
+        System.out.println(message);
+        driver.quit();
+
+        Assert.assertEquals(message, "You have done a right click");
+    }
 }
