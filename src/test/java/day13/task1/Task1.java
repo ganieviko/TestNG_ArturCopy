@@ -30,4 +30,24 @@ public class Task1 {
 
         Assert.assertEquals(message, "You have done a dynamic click");
     }
+
+    @Test
+    public void actionDoubleClickTestCase() {
+        System.setProperty("webdriver.chrome.driver", MyConstants.DRIVER_PATH);
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get( "https://demoqa.com/buttons" );
+
+        WebElement button = driver.findElement(By.xpath("//button[text()='Double Click Me']"));
+
+        Actions builder = new Actions(driver);
+        Action action = builder.moveToElement(button).doubleClick().build();
+        action.perform();
+
+        String message = driver.findElement(By.id("doubleClickMessage")).getText();
+        System.out.println(message);
+        driver.quit();
+
+        Assert.assertEquals(message, "You have done a double click");
+    }
 }
