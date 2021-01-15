@@ -126,5 +126,24 @@ public class _01_TestNGAsserts {
         Assert.assertEquals(actual, expected);
     }
 
+    @Test
+    public void assertFail() {
+        if (!isDataAvailable()) {
+            Assert.fail("The data should be available before continuing the test");
+        }
+    }
 
+    @Test
+    public void assertFailWrapper() {
+        try {
+            throw new Exception("Custom Exception Message");
+        } catch (Exception e) {
+            Assert.fail("The test failed because we caught an exception", e);
+        }
+    }
+
+    @Test
+    public void failureTest() throws Exception {
+        throw new Exception("Custom Exception Message");
+    }
 }
