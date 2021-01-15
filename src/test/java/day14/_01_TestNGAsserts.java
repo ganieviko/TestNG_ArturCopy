@@ -2,6 +2,7 @@ package day14;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.Random;
 
@@ -145,5 +146,25 @@ public class _01_TestNGAsserts {
     @Test
     public void failureTest() throws Exception {
         throw new Exception("Custom Exception Message");
+    }
+
+    @Test
+    public void softAssert() {
+        String actual = "Hello";
+
+        SoftAssert sf = new SoftAssert();
+        sf.assertEquals(actual, "hello"); // equal to hello
+        sf.assertEquals(actual.length(),  0); // length equal to 0
+        sf.assertEquals(actual.charAt(0), 'C'); // that it start with capital C
+
+        sf.assertAll(); // will check every assertion and throw an exception if any assertion fails
+    }
+
+    @Test
+    public void hardAssert() {
+        String actual = "Hello";
+        Assert.assertEquals(actual, "hello"); // equal to hello
+        Assert.assertEquals(actual.length(),  0); // length equal to 0
+        Assert.assertEquals(actual.charAt(0), 'C'); // that it start with capital C
     }
 }
