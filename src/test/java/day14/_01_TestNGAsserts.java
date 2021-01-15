@@ -152,7 +152,7 @@ public class _01_TestNGAsserts {
     public void softAssert() {
         String actual = "Hello";
 
-        SoftAssert sf = new SoftAssert();
+        SoftAssert sf = new SoftAssert(); // use soft assert if you want to continue testing even though some of the assertions are failing already
         sf.assertEquals(actual, "hello"); // equal to hello
         sf.assertEquals(actual.length(),  0); // length equal to 0
         sf.assertEquals(actual.charAt(0), 'C'); // that it start with capital C
