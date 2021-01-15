@@ -89,4 +89,42 @@ public class _01_TestNGAsserts {
         Assert.assertNotSame(actual, expected, "Actual should not point to same object");
     }
 
+    @Test
+    public void assertTrue() {
+        boolean actual = isDataAvailable();
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void assertFalse() {
+        boolean actual = isDataAvailable();
+        Assert.assertFalse(actual);
+    }
+
+    private boolean isDataAvailable() {
+        return new Random().nextBoolean();
+    }
+
+    @Test
+    public void assertTrueHowNOTtoUSE() {
+        String actual = "Hi";
+        String expected = "Hello";
+        Assert.assertTrue(actual == expected);
+    }
+
+    @Test
+    public void assertTrueHowNOTtoUSE2() {
+        String actual = "Hi";
+        String expected = "Hello";
+        Assert.assertTrue(actual.equals(expected), "Actual should be equal to expected!");
+    }
+
+    @Test
+    public void assertEqualsHowToUSE() {
+        String actual = "Hi";
+        String expected = "Hello";
+        Assert.assertEquals(actual, expected);
+    }
+
+
 }
