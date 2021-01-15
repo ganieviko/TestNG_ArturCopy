@@ -68,5 +68,17 @@ public class _01_TestNGAsserts {
         return returnNullOrNot ? null : new Object();
     }
 
+    @Test
+    public void assertSame() {
+        String actual = "Hello";
+        String expected = "Hello";
+        Assert.assertSame(actual, expected, "Actual should point to same object");
+    }
 
+    @Test
+    public void assertSame2() {
+        String actual = "Hello";
+        String expected = new String("Hello");
+        Assert.assertSame(actual, expected, "Actual should point to same object");
+    }
 }
