@@ -17,4 +17,20 @@ public class _01_TestNGAsserts {
         String expected = new String("Hello");
         Assert.assertEquals(actual, expected, "Actual should be equal to Expected");
     }
+
+    @Test
+    public void assertEquals3() {
+        String[] actual = {"Hello", "2"};
+        String[] expected = {"Hello", "2"};
+        Assert.assertEquals(actual, expected, "Actual should be equal to Expected");
+    }
+
+    @Test
+    public void assertEqualsNoOrder() {
+        String[] actual = {"Hello", "2"};
+        String[] expected = {"2", "Hello"};
+        Assert.assertEqualsNoOrder(actual, expected, "Actual should be equal to Expected");
+    }
+
+
 }
