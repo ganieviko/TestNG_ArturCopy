@@ -81,4 +81,12 @@ public class _01_TestNGAsserts {
         String expected = new String("Hello");
         Assert.assertSame(actual, expected, "Actual should point to same object");
     }
+
+    @Test
+    public void assertNotSame() {
+        String actual = new String("Hello");
+        String expected = new String("Hello");
+        Assert.assertNotSame(actual, expected, "Actual should not point to same object");
+    }
+
 }
