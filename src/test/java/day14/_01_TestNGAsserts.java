@@ -3,6 +3,8 @@ package day14;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Random;
+
 public class _01_TestNGAsserts {
     @Test
     public void assertEquals() {
@@ -52,6 +54,18 @@ public class _01_TestNGAsserts {
         double expected = 1.09;
         double delta = 0.02;
         Assert.assertNotEquals(actual, expected, delta, "Actual should be not equal to Expected");
+    }
+
+    @Test
+    public void assertNotNull() {
+        Object o = someFunctionThatMightProduceNull();
+        Assert.assertNotNull(o, "O should not be null");
+        o.toString();
+    }
+
+    private Object someFunctionThatMightProduceNull() {
+        boolean returnNullOrNot = new Random().nextBoolean();
+        return returnNullOrNot ? null : new Object();
     }
 
 
