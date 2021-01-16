@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Campus Test Suite">
+    <test name="Country Test">
+        <classes>
+            <class name="day15._03_TestNGXML.GeneralTestSetup"></class>
+            <class name="day15._03_TestNGXML.CountryTests"></class>
+        </classes>
+    </test>
+    <test name="City Test">
+        <classes>
+            <class name="day15._03_TestNGXML.GeneralTestSetup"></class>
+            <class name="day15._03_TestNGXML.CityTests"></class>
+        </classes>
+    </test>
+</suite>
