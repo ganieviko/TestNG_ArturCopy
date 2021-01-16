@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Custom Suite">
+    <test name="Custom Test">
+        <classes>
+            <class name="day15.task1.testNgClass1"></class>
+            <class name="day15.task1.testNgClass2"></class>
+        </classes>
+    </test>
+</suite>
