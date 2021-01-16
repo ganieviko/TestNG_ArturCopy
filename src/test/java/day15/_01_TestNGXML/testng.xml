@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Campus Test Suite">
+    <test name="Country Test">
+        <classes>
+            <class name="day15._01_TestNGXML.CountryTests"></class>
+        </classes>
+    </test>
+</suite>
