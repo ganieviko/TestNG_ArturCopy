@@ -53,4 +53,20 @@ public class CountryTest {
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector("toolbar h3"), "Countries"));
         Assert.assertEquals(driver.findElement(By.cssSelector("toolbar h3")).getText(), "Countries");
     }
+
+    @Test(dependsOnMethods = {"menuNavigationTest", "loginTestCase"})
+    public void createCountryTest() {
+        driver.findElement(By.cssSelector("ms-add-button[tooltip='COUNTRY.TITLE.ADD']")).click();
+
+        By nameInputSelector = By.cssSelector("ms-dialog-content ms-text-field[placeholder='GENERAL.FIELD.NAME'] > input");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(nameInputSelector));
+        driver.findElement(nameInputSelector).sendKeys("New Country Name"); // TODO: random country name
+
+        driver.findElement(By.tagName("ms-save-button")).click();
+        // there will be request made to backend to save the country
+        // this request takes time
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("toast-container")));
+        String text = driver.findElement(By.id("toast-container")).getText();
+        Assert.assertEquals(text, "Country successfully created");
+    }
 }
