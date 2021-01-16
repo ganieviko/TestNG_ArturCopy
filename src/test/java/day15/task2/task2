@@ -1,3 +1,3 @@
 create 2 testNg classes -> include possible before and after annotations
 create 1 testNg setup and teardown class -> include possible before and after annotations
-create 1 testNg xml and add two tests, with setup/teardown class included in each
+create 1 testNg xml and add two tests for two testNg class, with setup/teardown class included in each
