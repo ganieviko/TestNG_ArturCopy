@@ -3,12 +3,14 @@
     <test name="test 1">
         <classes>
             <class name="day15.task2.GeneralSetupClass"></class>
+            <class name="day15.task2.TestSetupClass"></class>
             <class name="day15.task2.testNgClass1"></class>
         </classes>
     </test>
     <test name="test 2">
         <classes>
-            <class name="day15.task2.GeneralSetupClass"></class>
+            <class name="day15.task2.GeneralSetupClass2"></class>
+            <class name="day15.task2.TestSetupClass"></class>
             <class name="day15.task2.testNgClass2"></class>
         </classes>
     </test>
