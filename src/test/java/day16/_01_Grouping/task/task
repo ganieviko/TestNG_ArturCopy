@@ -1,0 +1,4 @@
+Create 2 classes with 3 different groups
+Create an xml and group your tests
+    - include group 1
+    - exclude group 2
