@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Test Suite">
+    <test name="Functional Tests">
+        <groups>
+            <run>
+                <include name="functional"></include>
+                <include name="regression"></include>
+            </run>
+        </groups>
+        <classes>
+            <class name="day16._01_Grouping.CityTests"></class>
+            <class name="day16._01_Grouping.CountryTests"></class>
+        </classes>
+    </test>
+</suite>
