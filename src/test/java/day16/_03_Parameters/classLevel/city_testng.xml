@@ -6,6 +6,11 @@
             <class name="day16._03_Parameters.classLevel.CityTests">
                 <parameter name="name" value="Techno Study4"></parameter>
                 <parameter name="status" value="status4"></parameter>
+                <methods>
+                    <parameter name="name" value="Techno Study"></parameter>
+                    <include name="testCase3"></include>
+                    <include name="testCase1"></include>
+                </methods>
             </class>
         </classes>
     </test>
