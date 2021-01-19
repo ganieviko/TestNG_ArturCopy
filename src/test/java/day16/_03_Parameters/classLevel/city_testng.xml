@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="City Test Suite">
+    <test name="Include Tests">
+        <classes>
+            <class name="day16._03_Parameters.classLevel.CityTests">
+                <parameter name="name" value="Techno Study4"></parameter>
+                <parameter name="status" value="status4"></parameter>
+            </class>
+        </classes>
+    </test>
+</suite>

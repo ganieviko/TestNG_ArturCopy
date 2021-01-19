@@ -1,4 +1,4 @@
-package day16._03_Parameters.methodLevel;
+package day16._03_Parameters.classLevel;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
