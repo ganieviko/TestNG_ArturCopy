@@ -10,6 +10,7 @@
         <classes>
             <class name="day16._01_Grouping.CityTests"></class>
             <class name="day16._01_Grouping.CountryTests"></class>
+            <class name="day16._01_Grouping.CitizenshipTests"></class>
         </classes>
     </test>
 </suite>
