@@ -17,4 +17,9 @@ public class CityTests {
     public void testCase3(){
         System.out.println("City test case smoke 3");
     }
+
+    @Test(groups = {"regression"})
+    public void testCase4(){
+        System.out.println("City test case regression 4");
+    }
 }
