@@ -6,7 +6,9 @@
         <parameter name="status" value="status4"></parameter>
         <classes>
             <class name="day16._03_Parameters.testLevel.CityTests"></class>
-            <class name="day16._03_Parameters.testLevel.CountryTests"></class>
+            <class name="day16._03_Parameters.testLevel.CountryTests">
+                <parameter name="name" value="Techno Study country"></parameter>
+            </class>
         </classes>
     </test>
 </suite>
