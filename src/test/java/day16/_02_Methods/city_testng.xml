@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="City Test Suite">
+    <test name="Include Tests">
+        <classes>
+            <class name="day16._02_Methods.CityTests">
+                <methods>
+                    <include name="testCase1"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Exclude Tests">
+        <classes>
+            <class name="day16._02_Methods.CityTests">
+                <methods>
+                    <exclude name="testCase1"></exclude>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
