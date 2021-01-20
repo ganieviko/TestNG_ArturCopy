@@ -2,8 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
     <listeners>
-        <listener class-name="org.testng.reporters.EmailableReporter2"></listener>
-        <listener class-name="org.testng.reporters.XMLReporter"></listener>
+<!--        <listener class-name="org.testng.reporters.EmailableReporter2"></listener>-->
+<!--        <listener class-name="org.testng.reporters.XMLReporter"></listener>-->
+        <listener class-name="org.testng.reporters.TestHTMLReporter"></listener>
     </listeners>
     <test name="Test">
         <classes>
