@@ -1,0 +1,4 @@
+create 2 test classes with at least 3 methods each(1 success, 1 skipped, 1 failure)
+create an xml file with 2 test inside, each declaring one test class inside
+Before each test print 20 dashes and test name and then 20 dashes again
+Before each test case print 10 dashes and test case name and then 10 dashes again
