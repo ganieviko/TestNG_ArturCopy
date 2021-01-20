@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
+import java.util.Random;
+
 public class SimpleTests {
     @Test
     public void successfulTestCase() {
@@ -21,8 +23,13 @@ public class SimpleTests {
     }
 
     @Test
-    public void skippedTestCase2() {
-        throw new SkipException("Skipped Test Case");
+    public void sometimesSkippedTestCase() {
+        boolean websiteLoginIsAvailable = new Random().nextBoolean();
+        if(!websiteLoginIsAvailable) {
+            throw new SkipException("Skipped Test Case");
+        } else {
+            System.out.println("Successful Test Case");
+        }
     }
 
     @Test
