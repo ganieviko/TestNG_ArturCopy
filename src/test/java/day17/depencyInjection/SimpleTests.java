@@ -24,7 +24,7 @@ public class SimpleTests {
     }
 
     @BeforeMethod
-    public void beforeMethod(Method method){
+    public void beforeMethod(ITestContext context, Method method){
         System.out.println("Before method: " + method.getName());
     }
 
