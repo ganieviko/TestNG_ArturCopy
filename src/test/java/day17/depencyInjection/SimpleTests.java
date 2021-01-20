@@ -1,9 +1,8 @@
 package day17.depencyInjection;
 
 import org.testng.*;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+import org.testng.xml.XmlTest;
 
 import java.util.Random;
 
@@ -15,6 +14,12 @@ public class SimpleTests {
         for (ITestNGMethod method: allTestMethods) {
             System.out.println(method.getMethodName());
         }
+    }
+
+    @BeforeTest
+    public void beforeMethod(XmlTest test) {
+        String testName = test.getName();
+        System.out.println("-------------- " +  testName + " --------------");
     }
 
     @AfterMethod
