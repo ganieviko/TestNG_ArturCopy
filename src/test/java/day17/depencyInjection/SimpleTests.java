@@ -4,6 +4,7 @@ import org.testng.*;
 import org.testng.annotations.*;
 import org.testng.xml.XmlTest;
 
+import java.lang.reflect.Method;
 import java.util.Random;
 
 public class SimpleTests {
@@ -20,6 +21,11 @@ public class SimpleTests {
     public void beforeMethod(XmlTest test) {
         String testName = test.getName();
         System.out.println("-------------- " +  testName + " --------------");
+    }
+
+    @BeforeMethod
+    public void beforeMethod(Method method){
+        System.out.println("Before method: " + method.getName());
     }
 
     @AfterMethod
