@@ -14,6 +14,13 @@ public class _05_DataProvider {
     }
 
     @Test(dataProvider = "customProvider")
+    public void test1(String actualCity, int number, Object o) {
+        System.out.println(actualCity);
+        System.out.println(number);
+        System.out.println(o);
+    }
+
+    @Test(dataProvider = "customProvider")
     public void test2(String actualCity, int number, Object o) {
         System.out.println(actualCity);
         System.out.println(number);
@@ -21,14 +28,26 @@ public class _05_DataProvider {
     }
 
     @DataProvider(name = "customProvider")
-    public Object[][] dataProvider2() {
-        Object[][] testData = {
-                {"New York", 1, new Object()},
-                {"Almaty", 2, new Object()},
-                {"Istanbul", 3, null},
-                {"Baku", 4, new Object()}
-                // ... 100 rows ...
-        };
+    public Object[][] dataProvider2(Method method) {
+        System.out.println(method.getName() + " is accessing data provider");
+        Object[][] testData = null;
+        if (method.getName().equals("test1")) {
+            testData = new Object[][]{
+                    {"New York", 1, new Object()},
+                    {"Almaty", 2, new Object()},
+                    {"Istanbul", 3, null},
+                    {"Baku", 4, new Object()}
+                    // ... 100 rows ...
+            };
+        } else {
+            testData = new Object[][]{
+                    {"New Jersey", 1, new Object()},
+                    {"Astana", 2, new Object()},
+                    {"Ankara", 3, null},
+                    {"Gence", 4, new Object()}
+                    // ... 100 rows ...
+            };
+        }
         return testData;
     }
 
