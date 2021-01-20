@@ -1,0 +1,3 @@
+create 5 test cases, 1 with failure 1 skipped, 3 successful
+Before each test case, print the name of the method
+After each test case, print status "success", "failure" or "skipped"
