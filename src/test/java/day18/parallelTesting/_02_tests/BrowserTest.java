@@ -11,8 +11,8 @@ public class BrowserTest {
     WebDriver driver;
     @Parameters("browser")
     @Test
-    public void launchBrowser(String browser) {
-        switch (browser) {
+    public void launchBrowser(String browserName) {
+        switch (browserName) {
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", StudentConstants.CHROME_DRIVER_PATH);
                 driver = new ChromeDriver();
