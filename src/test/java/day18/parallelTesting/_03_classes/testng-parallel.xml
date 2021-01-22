@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" parallel="classes">
+    <listeners>
+        <listener class-name="org.testng.reporters.EmailableReporter2"></listener>
+        <listener class-name="org.testng.reporters.XMLReporter"></listener>
+        <listener class-name="org.testng.reporters.TestHTMLReporter"></listener>
+    </listeners>
     <test name="Edge Test">
         <classes>
             <class name="day18.parallelTesting._03_classes.CitizenshipTests"></class>
