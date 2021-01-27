@@ -4,12 +4,10 @@ import day19.Selectors;
 import day19.StudentConstants;
 import day21.pom.LoginPage;
 import day21.pom.MenuComponent;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
+import day21.util.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -17,9 +15,8 @@ import org.testng.annotations.*;
 
 import java.util.List;
 
-public class SchoolDepartmentSuccessfulCreationTest {
+public class SchoolDepartmentSuccessfulCreationTest extends BaseTest {
     WebDriver driver;
-    WebDriverWait wait;
     private String departmentName;
     private String departmentCode;
     private int numberOfRowsBeforeSave;
@@ -137,18 +134,4 @@ public class SchoolDepartmentSuccessfulCreationTest {
         };
         return testData;
     }
-
-    private <T> void waitFor(ExpectedCondition<T> condition) {
-        waitFor(condition, condition.toString());
-    }
-
-    private <T> void waitFor(ExpectedCondition<T> condition, String errorMessage) {
-        try {
-            wait.until(condition);
-        } catch (TimeoutException e) {
-            Assert.fail(errorMessage);
-        }
-    }
-
-
 }
