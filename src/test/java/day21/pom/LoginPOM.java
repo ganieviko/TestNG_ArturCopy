@@ -10,7 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPOM {
-    WebDriver driver;
+    private WebDriver driver;
+    private WebDriverWait wait;
 
     @FindBy(css="input[formcontrolname='username']")
     private WebElement username;
@@ -29,6 +30,7 @@ public class LoginPOM {
 
     public LoginPOM(WebDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(driver, 5);
         PageFactory.initElements(driver, this);
     }
 
@@ -45,12 +47,10 @@ public class LoginPOM {
     }
 
     public void waitForMenu() {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.visibilityOf(menu));
     }
 
     public void waitForErrorMessage(String message) {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.textToBePresentInElement(alert, message));
     }
 }
