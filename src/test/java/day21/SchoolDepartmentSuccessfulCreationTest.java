@@ -4,6 +4,7 @@ import day19.Selectors;
 import day19.StudentConstants;
 import day21.pom.LoginPage;
 import day21.pom.MenuComponent;
+import day21.pom.MenuPOM;
 import day21.util.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,7 +22,7 @@ public class SchoolDepartmentSuccessfulCreationTest extends BaseTest {
     private String departmentCode;
     private int numberOfRowsBeforeSave;
     private LoginPage loginPage;
-    private MenuComponent menu;
+    private MenuPOM menu;
 
     @BeforeClass
     public void setUp() {
@@ -34,7 +35,7 @@ public class SchoolDepartmentSuccessfulCreationTest extends BaseTest {
         departmentName = "High School";
         departmentCode = "HS-1";
         loginPage = new LoginPage(driver);
-        menu = new MenuComponent(driver);
+        menu = new MenuPOM(driver);
     }
 
     @Parameters({"username", "password"})
@@ -48,16 +49,10 @@ public class SchoolDepartmentSuccessfulCreationTest extends BaseTest {
 
     @Test(dependsOnMethods = "login")
     public void navigate() {
-        waitFor(ExpectedConditions.visibilityOfElementLocated(menu.setupMenu), "Setup Menu not visible");
         menu.navigateToSetup();
-
-        waitFor(ExpectedConditions.visibilityOfElementLocated(menu.schoolSetupMenu), "School Setup Menu not visible");
         menu.navigateToSchoolSetupMenu();
-
-        waitFor(ExpectedConditions.visibilityOfElementLocated(menu.departmentMenu), "Department Menu not visible");
         menu.navigateToDepartmentMenu();
-
-        waitFor(ExpectedConditions.textToBePresentInElementLocated(menu.toolbarTitle, "School Departments"), "We did not navigate to correct menu");
+        menu.waitToolbarHeader("School Departments");
     }
 
     @Test(dependsOnMethods = "navigate")

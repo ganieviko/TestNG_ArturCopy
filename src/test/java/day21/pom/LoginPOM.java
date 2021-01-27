@@ -9,9 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPOM {
+public class LoginPOM extends BasePom {
     private WebDriver driver;
-    private WebDriverWait wait;
 
     @FindBy(css="input[formcontrolname='username']")
     private WebElement username;
