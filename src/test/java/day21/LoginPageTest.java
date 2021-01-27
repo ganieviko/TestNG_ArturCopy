@@ -1,17 +1,11 @@
 package day21;
 
-import day19.Selectors;
 import day19.StudentConstants;
-import day21.pom.LoginPage;
-import day21.pom.MenuComponent;
+import day21.pom.LoginPOM;
 import day21.util.BaseTest;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -19,7 +13,7 @@ import org.testng.annotations.Test;
 public class LoginPageTest extends BaseTest {
 
     private WebDriver driver;
-    private LoginPage loginPage;
+    private LoginPOM loginPage;
 
     @BeforeClass
     public void setUp() {
@@ -28,7 +22,7 @@ public class LoginPageTest extends BaseTest {
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 5);
 
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPOM(driver);
     }
 
     @BeforeMethod
@@ -41,7 +35,7 @@ public class LoginPageTest extends BaseTest {
         loginPage.fillInUserName("daulet2030@gmail.com");
         loginPage.fillInUserPassword("TechnoStudy123@");
         loginPage.login();
-        waitFor(ExpectedConditions.presenceOfElementLocated(loginPage.menu));
+        loginPage.waitForMenu();
     }
 
     @Test
@@ -50,9 +44,8 @@ public class LoginPageTest extends BaseTest {
         loginPage.fillInUserPassword("password");
         loginPage.login();
         // validate that not logged in
-        waitFor(ExpectedConditions.textToBePresentInElementLocated(Selectors.alert, "Invalid username or password"));
+        loginPage.waitForErrorMessage("Invalid username or password");
     }
-
 
 
 }
