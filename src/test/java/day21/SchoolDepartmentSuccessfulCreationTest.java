@@ -63,10 +63,16 @@ public class SchoolDepartmentSuccessfulCreationTest extends BaseTest {
         waitFor(ExpectedConditions.visibilityOfElementLocated(Selectors.nameInput));
         driver.findElement(Selectors.nameInput).sendKeys(departmentName); // TODO: random string
 
-        waitFor(ExpectedConditions.presenceOfElementLocated(Selectors.codeInput));
-        driver.findElement(Selectors.codeInput).sendKeys(departmentCode);
+        String actualDepName = driver.findElement(Selectors.nameInput).getAttribute("value");
+        Assert.assertEquals(actualDepName, departmentName);
 
-        // TODO: validate that text was entered
+        waitFor(ExpectedConditions.presenceOfElementLocated(Selectors.codeInput));
+        WebElement departmentCodeInput = driver.findElement(Selectors.codeInput);
+        departmentCodeInput.clear();
+        departmentCodeInput.sendKeys(departmentCode);
+
+        String actualDepCode = departmentCodeInput.getAttribute("value");
+        Assert.assertEquals(actualDepCode, departmentCode);
     }
 
     @Test(dependsOnMethods = "fillDepartmentInfo")
