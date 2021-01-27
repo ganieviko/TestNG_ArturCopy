@@ -2,8 +2,8 @@ package day21;
 
 import day19.Selectors;
 import day19.StudentConstants;
+import day21.pom.DepartmentFormPOM;
 import day21.pom.LoginPage;
-import day21.pom.MenuComponent;
 import day21.pom.MenuPOM;
 import day21.util.BaseTest;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +23,7 @@ public class SchoolDepartmentSuccessfulCreationTest extends BaseTest {
     private int numberOfRowsBeforeSave;
     private LoginPage loginPage;
     private MenuPOM menu;
+    private DepartmentFormPOM departmentForm;
 
     @BeforeClass
     public void setUp() {
@@ -36,6 +37,7 @@ public class SchoolDepartmentSuccessfulCreationTest extends BaseTest {
         departmentCode = "HS-1";
         loginPage = new LoginPage(driver);
         menu = new MenuPOM(driver);
+        departmentForm = new DepartmentFormPOM(driver);
     }
 
     @Parameters({"username", "password"})
@@ -57,22 +59,11 @@ public class SchoolDepartmentSuccessfulCreationTest extends BaseTest {
 
     @Test(dependsOnMethods = "navigate")
     public void fillDepartmentInfo() {
-        waitFor(ExpectedConditions.visibilityOfElementLocated(Selectors.plusButton));
-        driver.findElement(Selectors.plusButton).click();
-
-        waitFor(ExpectedConditions.visibilityOfElementLocated(Selectors.nameInput));
-        driver.findElement(Selectors.nameInput).sendKeys(departmentName); // TODO: random string
-
-        String actualDepName = driver.findElement(Selectors.nameInput).getAttribute("value");
-        Assert.assertEquals(actualDepName, departmentName);
-
-        waitFor(ExpectedConditions.presenceOfElementLocated(Selectors.codeInput));
-        WebElement departmentCodeInput = driver.findElement(Selectors.codeInput);
-        departmentCodeInput.clear();
-        departmentCodeInput.sendKeys(departmentCode);
-
-        String actualDepCode = departmentCodeInput.getAttribute("value");
-        Assert.assertEquals(actualDepCode, departmentCode);
+        departmentForm.addNew();
+        departmentForm.fillInName(departmentName);
+        Assert.assertEquals(departmentForm.getDepNameInputValue(), departmentName);
+        departmentForm.fillInCode(departmentCode);
+        Assert.assertEquals(departmentForm.getDepCodeInputValue(), departmentCode);
     }
 
     @Test(dependsOnMethods = "fillDepartmentInfo")
