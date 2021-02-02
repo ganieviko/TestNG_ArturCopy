@@ -61,9 +61,11 @@ public class SchoolDepartmentSteps extends BaseTest  {
         driver.findElement(Selectors.plusButton).click();
 
         waitFor(ExpectedConditions.visibilityOfElementLocated(Selectors.nameInput));
-        driver.findElement(Selectors.nameInput).sendKeys(name); // TODO: random string
+        driver.findElement(Selectors.nameInput).clear();
+        driver.findElement(Selectors.nameInput).sendKeys(name);
 
         waitFor(ExpectedConditions.presenceOfElementLocated(Selectors.codeInput));
+        driver.findElement(Selectors.codeInput).clear();
         driver.findElement(Selectors.codeInput).sendKeys(code);
 
         numberOfRowsBeforeSave = driver.findElements(Selectors.departmentRows).size();
@@ -92,7 +94,7 @@ public class SchoolDepartmentSteps extends BaseTest  {
         driver.findElement(Selectors.confirmYes).click();
     }
 
-    @When("I create department with random name and code")
+    @When("I create department with name random and code random")
     public void iCreateDepartmentWithRandomNameAndCode() {
         Random random = new Random();
         randomName = "random name " + random.nextInt();
@@ -102,16 +104,18 @@ public class SchoolDepartmentSteps extends BaseTest  {
         driver.findElement(Selectors.plusButton).click();
 
         waitFor(ExpectedConditions.visibilityOfElementLocated(Selectors.nameInput));
-        driver.findElement(Selectors.nameInput).sendKeys(randomName); // TODO: random string
+        driver.findElement(Selectors.nameInput).clear();
+        driver.findElement(Selectors.nameInput).sendKeys(randomName);
 
         waitFor(ExpectedConditions.presenceOfElementLocated(Selectors.codeInput));
+        driver.findElement(Selectors.codeInput).clear();
         driver.findElement(Selectors.codeInput).sendKeys(randomCode);
 
         numberOfRowsBeforeSave = driver.findElements(Selectors.departmentRows).size();
         driver.findElement(Selectors.saveButton).click();
     }
 
-    @When("I delete the department with random name and code")
+    @When("I delete the department with name random and code random")
     public void iDeleteTheDepartmentWithRandomNameAndCode() {
         System.out.println("Deleting department " + randomName);
         waitFor(ExpectedConditions.numberOfElementsToBeMoreThan(Selectors.departmentRows, numberOfRowsBeforeSave));
