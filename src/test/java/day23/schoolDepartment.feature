@@ -18,7 +18,7 @@ Feature: School Department
     Then I should see success message "School Department successfully deleted"
 
   Scenario: Successfully creating and deleting department with random name and code
-    When I create department with random name and code
+    When I create department with name random and code random
     Then I should see success message "School Department successfully created"
-    When I delete the department with random name and code
+    When I delete the department with name random and code random
     Then I should see success message "School Department successfully deleted"
