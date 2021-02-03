@@ -9,6 +9,10 @@ public class DepartmentSection {
         this.shortName = shortName;
     }
 
+    public DepartmentSection() {
+
+    }
+
     public String getName() {
         return name;
     }

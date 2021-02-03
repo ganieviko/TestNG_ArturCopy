@@ -40,7 +40,11 @@ public class DepartmentSectionSteps extends BaseTest {
 
     @DataTableType
     public DepartmentSection converter(Map<String, String> entry) {
-        return new DepartmentSection(entry.get("sectionName"), entry.get("sectionShortName"));
+//        return new DepartmentSection(entry.get("sectionName"), entry.get("sectionShortName"));
+        DepartmentSection object = new DepartmentSection();
+        object.setName(entry.get("sectionName"));
+        object.setShortName(entry.get("sectionShortName"));
+        return object;
     }
 
     @And("I create following section")
