@@ -2,16 +2,12 @@ package day23.StepDefinitions;
 
 import day19.Selectors;
 import day21.util.BaseTest;
-import day23.model.DepartmentSection;
-import io.cucumber.datatable.DataTable;
-import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,11 +15,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class SchoolDepartmentSteps extends BaseTest  {
-    private WebDriver driver;
     private int numberOfRowsBeforeSave;
     private String randomName;
     private String randomCode;
@@ -137,29 +131,6 @@ public class SchoolDepartmentSteps extends BaseTest  {
         driver.findElement(Selectors.confirmYes).click();
     }
 
-    @And("I create following section")
-    public void iCreateFollowingSection(DataTable table) {
-        Map<String, String> map = table.asMap(String.class, String.class);
-        driver.findElement(Selectors.sectionTab).click();
-        waitFor(ExpectedConditions.visibilityOfElementLocated(Selectors.plusButtonOverlay));
-        driver.findElement(Selectors.plusButtonOverlay).click();
-        waitFor(ExpectedConditions.visibilityOfElementLocated(Selectors.nameInput));
-        driver.findElement(Selectors.nameInput).clear();
-        driver.findElement(Selectors.nameInput).sendKeys(map.get("sectionName"));
-        waitFor(ExpectedConditions.presenceOfElementLocated(Selectors.shortNameInput));
-        driver.findElement(Selectors.shortNameInput).clear();
-        driver.findElement(Selectors.shortNameInput).sendKeys(map.get("sectionShortName"));
-        driver.findElement(Selectors.addSectionButton).click();
-
-        List<WebElement> rows = driver.findElements(Selectors.sectionRows);
-        boolean found = false;
-        for (WebElement row : rows) {
-            if (row.getText().contains(map.get("sectionName")) && row.getText().contains(map.get("sectionShortName")))
-                found = true;
-        }
-        Assert.assertTrue(found, "The section was " + map.get("sectionName") + "not found, after adding");
-    }
-
     @When("I create department with name {string} and code {string} without saving")
     public void iCreateDepartmentWithNameAndCodeWithoutSaving(String name, String code) {
         waitFor(ExpectedConditions.visibilityOfElementLocated(Selectors.plusButton));
@@ -181,32 +152,5 @@ public class SchoolDepartmentSteps extends BaseTest  {
         driver.findElement(Selectors.saveButton).click();
     }
 
-    @And("I create following sections")
-    public void iCreateFollowingSections(List<DepartmentSection> list) {
-        for (DepartmentSection section : list) {
-            driver.findElement(Selectors.sectionTab).click();
-            waitFor(ExpectedConditions.visibilityOfElementLocated(Selectors.plusButtonOverlay));
-            driver.findElement(Selectors.plusButtonOverlay).click();
-            waitFor(ExpectedConditions.visibilityOfElementLocated(Selectors.nameInput));
-            driver.findElement(Selectors.nameInput).clear();
-            driver.findElement(Selectors.nameInput).sendKeys(section.getName());
-            waitFor(ExpectedConditions.presenceOfElementLocated(Selectors.shortNameInput));
-            driver.findElement(Selectors.shortNameInput).clear();
-            driver.findElement(Selectors.shortNameInput).sendKeys(section.getShortName());
-            driver.findElement(Selectors.addSectionButton).click();
 
-            List<WebElement> rows = driver.findElements(Selectors.sectionRows);
-            boolean found = false;
-            for (WebElement row : rows) {
-                if (row.getText().contains(section.getName()) && row.getText().contains(section.getShortName()))
-                    found = true;
-            }
-            Assert.assertTrue(found, "The section was " + section.getName() + "not found, after adding");
-        }
-    }
-
-    @DataTableType
-    public DepartmentSection converter(Map<String, String> entry) {
-        return new DepartmentSection(entry.get("sectionName"), entry.get("sectionShortName"));
-    }
 }
