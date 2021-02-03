@@ -3,15 +3,10 @@ package day23.StepDefinitions;
 import day19.Selectors;
 import day21.util.BaseTest;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.List;
@@ -21,23 +16,6 @@ public class SchoolDepartmentSteps extends BaseTest  {
     private int numberOfRowsBeforeSave;
     private String randomName;
     private String randomCode;
-
-    @Given("I navigate to website {string}")
-    public void iNavigateToWebsite(String url) {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, 5);
-        driver.get(url);
-    }
-
-    @And("I login using username:{word} and password {string}")
-    public void iLoginUsingUsernameAndPassword(String username, String password) {
-        driver.findElement(Selectors.username).sendKeys(username);
-        driver.findElement(Selectors.password).sendKeys(password);
-        driver.findElement(Selectors.loginButton).click();
-        waitFor(ExpectedConditions.presenceOfElementLocated(Selectors.menu));
-    }
 
     @And("I navigate to department creation menu")
     public void iNavigateToDepartmentCreationMenu() {
@@ -66,19 +44,14 @@ public class SchoolDepartmentSteps extends BaseTest  {
         driver.findElement(Selectors.codeInput).clear();
         driver.findElement(Selectors.codeInput).sendKeys(code);
 
-        numberOfRowsBeforeSave = driver.findElements(Selectors.departmentRows).size();
+        numberOfRowsBeforeSave = driver.findElements(Selectors.browserTableRows).size();
         driver.findElement(Selectors.saveButton).click();
-    }
-
-    @Then("I should see success message {string}")
-    public void iShouldSeeSuccessMessage(String message) {
-        waitFor(ExpectedConditions.textToBePresentInElementLocated(Selectors.alert, message));
     }
 
     @When("I delete the department with name {string} and code {string}")
     public void iDeleteTheDepartment(String departmentName, String departmentCode) {
-        waitFor(ExpectedConditions.numberOfElementsToBeMoreThan(Selectors.departmentRows, numberOfRowsBeforeSave));
-        List<WebElement> rows = driver.findElements(Selectors.departmentRows);
+        waitFor(ExpectedConditions.numberOfElementsToBeMoreThan(Selectors.browserTableRows, numberOfRowsBeforeSave));
+        List<WebElement> rows = driver.findElements(Selectors.browserTableRows);
         boolean found = false;
         for (WebElement row : rows) {
             if (row.getText().contains(departmentName) && row.getText().contains(departmentCode)) {
@@ -109,15 +82,15 @@ public class SchoolDepartmentSteps extends BaseTest  {
         driver.findElement(Selectors.codeInput).clear();
         driver.findElement(Selectors.codeInput).sendKeys(randomCode);
 
-        numberOfRowsBeforeSave = driver.findElements(Selectors.departmentRows).size();
+        numberOfRowsBeforeSave = driver.findElements(Selectors.browserTableRows).size();
         driver.findElement(Selectors.saveButton).click();
     }
 
     @When("I delete the department with name random and code random")
     public void iDeleteTheDepartmentWithRandomNameAndCode() {
         System.out.println("Deleting department " + randomName);
-        waitFor(ExpectedConditions.numberOfElementsToBeMoreThan(Selectors.departmentRows, numberOfRowsBeforeSave));
-        List<WebElement> rows = driver.findElements(Selectors.departmentRows);
+        waitFor(ExpectedConditions.numberOfElementsToBeMoreThan(Selectors.browserTableRows, numberOfRowsBeforeSave));
+        List<WebElement> rows = driver.findElements(Selectors.browserTableRows);
         boolean found = false;
         for (WebElement row : rows) {
             if (row.getText().contains(randomName) && row.getText().contains(randomCode)) {
@@ -144,7 +117,7 @@ public class SchoolDepartmentSteps extends BaseTest  {
         driver.findElement(Selectors.codeInput).clear();
         driver.findElement(Selectors.codeInput).sendKeys(code);
 
-        numberOfRowsBeforeSave = driver.findElements(Selectors.departmentRows).size();
+        numberOfRowsBeforeSave = driver.findElements(Selectors.browserTableRows).size();
     }
 
     @And("I click on department save button")

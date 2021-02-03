@@ -93,16 +93,16 @@ public class SchoolDepartmentSuccessfulCreationTest extends BaseTest {
 
     @Test(dependsOnMethods = "addSection")
     public void savingTheDepartment() {
-        numberOfRowsBeforeSave = driver.findElements(Selectors.departmentRows).size();
+        numberOfRowsBeforeSave = driver.findElements(Selectors.browserTableRows).size();
         driver.findElement(Selectors.saveButton).click();
         waitFor(ExpectedConditions.textToBePresentInElementLocated(Selectors.alert, "School Department successfully created"));
     }
 
     @Test(dependsOnMethods = "savingTheDepartment")
     public void deleteDepartment() {
-        waitFor(ExpectedConditions.numberOfElementsToBeMoreThan(Selectors.departmentRows, numberOfRowsBeforeSave));
+        waitFor(ExpectedConditions.numberOfElementsToBeMoreThan(Selectors.browserTableRows, numberOfRowsBeforeSave));
 
-        List<WebElement> rows = driver.findElements(Selectors.departmentRows);
+        List<WebElement> rows = driver.findElements(Selectors.browserTableRows);
         boolean found = false;
         for (WebElement row : rows) {
             if (row.getText().contains(departmentName) && row.getText().contains(departmentCode)) {
