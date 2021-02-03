@@ -2,7 +2,9 @@ package day23.StepDefinitions;
 
 import day19.Selectors;
 import day21.util.BaseTest;
+import day23.model.DepartmentSection;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -177,5 +179,34 @@ public class SchoolDepartmentSteps extends BaseTest  {
     @And("I click on department save button")
     public void iClickOnDepartmentSaveButton() {
         driver.findElement(Selectors.saveButton).click();
+    }
+
+    @And("I create following sections")
+    public void iCreateFollowingSections(List<DepartmentSection> list) {
+        for (DepartmentSection section : list) {
+            driver.findElement(Selectors.sectionTab).click();
+            waitFor(ExpectedConditions.visibilityOfElementLocated(Selectors.plusButtonOverlay));
+            driver.findElement(Selectors.plusButtonOverlay).click();
+            waitFor(ExpectedConditions.visibilityOfElementLocated(Selectors.nameInput));
+            driver.findElement(Selectors.nameInput).clear();
+            driver.findElement(Selectors.nameInput).sendKeys(section.getName());
+            waitFor(ExpectedConditions.presenceOfElementLocated(Selectors.shortNameInput));
+            driver.findElement(Selectors.shortNameInput).clear();
+            driver.findElement(Selectors.shortNameInput).sendKeys(section.getShortName());
+            driver.findElement(Selectors.addSectionButton).click();
+
+            List<WebElement> rows = driver.findElements(Selectors.sectionRows);
+            boolean found = false;
+            for (WebElement row : rows) {
+                if (row.getText().contains(section.getName()) && row.getText().contains(section.getShortName()))
+                    found = true;
+            }
+            Assert.assertTrue(found, "The section was " + section.getName() + "not found, after adding");
+        }
+    }
+
+    @DataTableType
+    public DepartmentSection converter(Map<String, String> entry) {
+        return new DepartmentSection(entry.get("sectionName"), entry.get("sectionShortName"));
     }
 }
