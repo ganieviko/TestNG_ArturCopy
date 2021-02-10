@@ -11,6 +11,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import utilities.ExcelReader;
+
+import java.io.IOException;
+import java.util.List;
 
 public class LoginPageTest extends BaseTest {
 
@@ -94,4 +98,47 @@ public class LoginPageTest extends BaseTest {
         return data;
     }
 
+    @Test(dataProvider = "loginTestCasesFromExcel")
+    public void dataDrivenLoginTestCaseWithExcel(String username, String password, String expectedResult) {
+        loginPage.fillInUserName(username);
+        loginPage.fillInUserPassword(password);
+        loginPage.login();
+
+        // verify results
+        switch (expectedResult) {
+            case "success":
+                loginPage.waitForMenu();
+                break;
+            case "failureMessage":
+                loginPage.waitForErrorMessage("Invalid username or password");
+                break;
+            case "failureUsername":
+                loginPage.waitForEmailError();
+                break;
+            case "failurePassword":
+                loginPage.waitForPasswordError();
+                break;
+            case "failureUsernameAndPassword":
+                loginPage.waitForEmailError();
+                loginPage.waitForPasswordError();
+                break;
+            default:
+                Assert.fail("Did not recognize expected result: " + expectedResult);
+        }
+    }
+
+    @DataProvider(name = "loginTestCasesFromExcel")
+    public Object[][] loginDataFromExcel() throws IOException {
+        ExcelReader reader = new ExcelReader("src/test/resources/login_test_cases.xlsx");
+        List<List<String>> rows = reader.getLists();
+        Object[][] data = new Object[rows.size()][];
+        for (int i = 0; i < rows.size(); i++) {
+            List<String> row = rows.get(i);
+            data[i] = new Object[row.size()];
+            for (int j = 0; j < row.size(); j++) {
+                data[i][j] = row.get(j);
+            }
+        }
+        return data;
+    }
 }
