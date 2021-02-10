@@ -27,6 +27,12 @@ public class LoginPOM extends BasePom {
     @FindBy(css="div[role='alertdialog']")
     private WebElement alert;
 
+    @FindBy(xpath="//mat-error[contains(text(), 'Email is required')]")
+    private WebElement emailErrorMessage;
+
+    @FindBy(xpath="//mat-error[contains(text(), 'Password is required')]")
+    private WebElement passwordErrorMessage;
+
     public LoginPOM(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, 5);
@@ -54,4 +60,14 @@ public class LoginPOM extends BasePom {
     public void waitForErrorMessage(String message) {
         wait.until(ExpectedConditions.textToBePresentInElement(alert, message));
     }
+
+    public void waitForEmailError() {
+        wait.until(ExpectedConditions.visibilityOf(emailErrorMessage));
+    }
+
+    public void waitForPasswordError() {
+        wait.until(ExpectedConditions.visibilityOf(passwordErrorMessage));
+    }
+
+
 }

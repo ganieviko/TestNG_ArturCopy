@@ -6,6 +6,7 @@ import day21.util.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -49,19 +50,31 @@ public class LoginPageTest extends BaseTest {
     }
 
     @Test(dataProvider = "loginTestCases")
-    public void dataDrivenLoginTestCase(String username, String password, String successExpected) {
+    public void dataDrivenLoginTestCase(String username, String password, String expectedResult) {
         loginPage.fillInUserName(username);
         loginPage.fillInUserPassword(password);
         loginPage.login();
 
         // verify results
-        switch (successExpected) {
+        switch (expectedResult) {
             case "success":
                 loginPage.waitForMenu();
                 break;
             case "failureMessage":
                 loginPage.waitForErrorMessage("Invalid username or password");
                 break;
+            case "failureUsername":
+                loginPage.waitForEmailError();
+                break;
+            case "failurePassword":
+                loginPage.waitForPasswordError();
+                break;
+            case "failureUsernameAndPassword":
+                loginPage.waitForEmailError();
+                loginPage.waitForPasswordError();
+                break;
+            default:
+                Assert.fail("Did not recognize expected result: " + expectedResult);
         }
 
     }
