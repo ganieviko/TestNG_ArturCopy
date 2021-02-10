@@ -134,7 +134,7 @@ public class LoginPageTest extends BaseTest {
         Object[][] data = new Object[rows.size()][];
         for (int i = 0; i < rows.size(); i++) {
             List<String> row = rows.get(i);
-            data[i] = new Object[row.size()];
+            data[i] = new Object[3];
             for (int j = 0; j < row.size(); j++) {
                 data[i][j] = row.get(j);
             }
