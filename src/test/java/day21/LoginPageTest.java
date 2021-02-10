@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginPageTest extends BaseTest {
@@ -47,5 +48,37 @@ public class LoginPageTest extends BaseTest {
         loginPage.waitForErrorMessage("Invalid username or password");
     }
 
+    @Test(dataProvider = "loginTestCases")
+    public void dataDrivenLoginTestCase(String username, String password, String successExpected) {
+        loginPage.fillInUserName(username);
+        loginPage.fillInUserPassword(password);
+        loginPage.login();
+
+        // verify results
+        switch (successExpected) {
+            case "success":
+                loginPage.waitForMenu();
+                break;
+            case "failureMessage":
+                loginPage.waitForErrorMessage("Invalid username or password");
+                break;
+        }
+
+    }
+
+    @DataProvider(name = "loginTestCases")
+    public Object[][] loginData() {
+        Object[][] data = new Object[][]{
+                {"daulet2030@gmail.com", "TechnoStudy123@", "success"},
+                {"daulet2030@gmail.com", "password", "failureMessage"},
+                {"daulet20302@gmail.com", "TechnoStudy123@", "failureMessage"},
+                {"", "TechnoStudy123@", "failureUsername"},
+                {"daulet2030@gmail.com", "", "failurePassword"},
+                {"", "", "failureUsernameAndPassword"},
+                {" ", " ", "failureMessage"},
+                {"sdfa@sdf", "1241!2asdf", "failureMessage"},
+        };
+        return data;
+    }
 
 }

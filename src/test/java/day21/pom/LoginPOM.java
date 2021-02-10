@@ -34,10 +34,12 @@ public class LoginPOM extends BasePom {
     }
 
     public void fillInUserName(String username) {
+        this.username.clear();
         this.username.sendKeys(username);
     }
 
     public void fillInUserPassword(String password){
+        this.password.clear();
         this.password.sendKeys(password);
     }
 
